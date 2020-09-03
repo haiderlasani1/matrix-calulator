@@ -14,3 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index');
+
+Route::group(['namespace' => 'Matrix', 'prefix' => 'matrix'], function () {
+    Route::post('multiplication', 'MatrixMultiplicationController@index');
+});
