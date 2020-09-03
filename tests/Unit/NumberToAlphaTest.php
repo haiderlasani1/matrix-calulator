@@ -2,20 +2,21 @@
 
 namespace Tests\Unit;
 
-use App\Modules\NumberToAlphaConverter;
 use PHPUnit\Framework\TestCase;
+use App\Modules\NumberToAlphaConverter;
 
 class NumberToAlphaTest extends TestCase
 {
     /**
      * @test
      * @dataProvider dataProvider
+     * @param $number
+     * @param $alpha
      */
     public function it_coverts_numbers_to_alpha($number, $alpha)
     {
         $converter = new NumberToAlphaConverter();
-        $result = $converter->parse($number);
-        $this->assertEquals($alpha, $result);
+        $this->assertEquals($alpha, $converter->parse($number));
     }
 
     public function dataProvider()
@@ -28,11 +29,11 @@ class NumberToAlphaTest extends TestCase
             [27, 'AA'],
             [28, 'AB'],
             [52, 'AZ'],
-            [800, 'ADT'],
-//            [27, 'AA'],
-//            [52, 'AZ'],
-//            [53, 'BA'],
-//            [27, 'AA'],
+            [801, 'ADU'],
+            [58, 'BF'],
+            [64, 'BL'],
+            [139, 'EI'],
+            [154, 'EX'],
         ];
     }
 }
