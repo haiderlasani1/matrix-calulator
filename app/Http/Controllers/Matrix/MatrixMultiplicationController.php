@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Matrix;
 
 use App\Http\Controllers\Controller;
-use App\Modules\MatrixModule\MatrixMultiplication;
 use App\Modules\NumberToAlphaConverter;
-use Illuminate\Http\Request;
+use App\Modules\MatrixModule\MatrixMultiplication;
+use App\Http\Requests\MatricesMultiplicationRequest;
 
 class MatrixMultiplicationController extends Controller
 {
-    public function index(Request $request)
+    public function index(MatricesMultiplicationRequest $request)
     {
-        $matrix1 = $request->matrix_1;
-        $matrix2 = $request->matrix_2;
+        $matrix1 = $request->matrix1;
+        $matrix2 = $request->matrix2;
 
         $alphaParser = new NumberToAlphaConverter();
 
