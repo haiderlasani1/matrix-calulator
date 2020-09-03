@@ -16,7 +16,7 @@ class NumberToAlphaTest extends TestCase
     public function it_coverts_numbers_to_alpha($number, $alpha)
     {
         $converter = new NumberToAlphaConverter();
-        $this->assertEquals($alpha, $converter->parse($number));
+        $this->assertEquals($alpha, $converter->parseToString($number));
     }
 
     public function dataProvider()

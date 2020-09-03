@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Modules;
+
+use App\Interfaces\ParsableInterface;
+
 ;
 
-class NumberToAlphaConverter
+class NumberToAlphaConverter implements ParsableInterface
 {
-    public function parse(int $number): string
+    public function parseToString(int $number): string
     {
         $totalAlphaCharacters = 26;
         $alphaCharacter = '';

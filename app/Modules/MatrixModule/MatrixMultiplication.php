@@ -2,11 +2,11 @@
 
 namespace App\Modules\MatrixModule;
 
-use App\Modules\NumberToAlphaConverter;
+use App\Interfaces\ParsableInterface;
 
 class MatrixMultiplication
 {
-    public function calculate(array $m1, array $m2, NumberToAlphaConverter $numberToAlphaConverter = null): array
+    public function calculate(array $m1, array $m2, ParsableInterface $numberToAlphaConverter = null): array
     {
         $r = count($m1);
         $c = count($m2[0]);
@@ -20,7 +20,7 @@ class MatrixMultiplication
                     $result[$i][$j] += $m1[$i][$k] * $m2[$k][$j];
 
                     if ($numberToAlphaConverter && ($k + 1) === $p) {
-                        $result[$i][$j] = $numberToAlphaConverter->parse($result[$i][$j]);
+                        $result[$i][$j] = $numberToAlphaConverter->parseToString($result[$i][$j]);
                     }
                 }
             }
