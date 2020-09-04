@@ -19,7 +19,7 @@ class NumericArray implements Rule
 
     public function checkForNumber($value)
     {
-        if (!(is_int($value))) {
+        if (!(is_int((int)$value))) {
             return $value;
         }
     }

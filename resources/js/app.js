@@ -5,7 +5,6 @@
  */
 
 import MatrixMultiplicationComponent from "./components/MatrixMultiplicationComponent";
-import ExampleComponent from "./components/ExampleComponent";
 
 require('./bootstrap');
 
@@ -30,7 +29,6 @@ window.Vue = require('vue');
 const app = new Vue({
     components: {
         MatrixMultiplicationComponent,
-        ExampleComponent
     },
     el: '#app',
 });

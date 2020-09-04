@@ -5,6 +5,11 @@
                 <div class="card">
                     <div class="card-header">Multiple Matrices</div>
                     <div class="card-body">
+                        <div style="display: flex">
+                            <matrix-component v-bind:matrix="matrix1"></matrix-component>
+                            <matrix-component v-bind:matrix="matrix2"></matrix-component>
+                        </div>
+                        <hr/>
                         <div v-html="resultMatrix"></div>
                         <div v-if="this.errors.message !== ''" class="alert alert-danger">
                             <p v-text="this.errors.message"></p>
@@ -12,6 +17,7 @@
                                 <li v-for="error in this.errors.errors" v-text="error[0]"></li>
                             </ul>
                         </div>
+                        <hr/>
                         <button @click="submit" class="btn btn-primary">Calculate</button>
                     </div>
                 </div>
@@ -22,13 +28,15 @@
 
 <script>
     import 'axios';
+    import MatrixComponent from "./MatrixComponent";
 
     export default {
+        components: {MatrixComponent},
         data() {
             return {
                 matrix1: [
                     [1, 2, 3],
-                    [4, 5, 6]
+                    [4, 5, 6],
                 ],
                 matrix2: [
                     [7, 8],
@@ -45,12 +53,12 @@
         },
         methods: {
             submit: function () {
+                this.resetData();
+
                 const jsonData = {
                     'matrix1': this.matrix1,
                     'matrix2': this.matrix2,
                 };
-                this.errors.message = '';
-                this.errors.errors = [];
                 axios.post('matrix/multiplication', jsonData)
                     .then(response => {
                         this.results = response['data']['total'];
@@ -64,7 +72,7 @@
             mapResults: function () {
                 const columns = this.results.length;
                 const rows = this.results[0].length;
-
+                this.resultMatrix += '<h3>Results</h3>';
                 for (let i = 0; i < columns; i++) {
                     this.resultMatrix += '<div class="matrix-column">';
                     for (let k = 0; k < rows; k++) {
@@ -72,23 +80,27 @@
                     }
                     this.resultMatrix += '</div>';
                 }
+            },
+            resetData: function () {
+                this.resultMatrix = '';
+                this.errors.message = '';
+                this.errors.errors = [];
             }
-
-
         }
     }
 </script>
 
 <style lang="scss">
-    .small-input {
-        width: 30px;
-    }
-
     .matrix-column {
         display: flex;
 
         div {
-            width: 30px;
+            min-width: 50px;
+            font-weight: bold;
+            border: 1px solid #f1f1f1;
+            text-align: center;
+            padding: 10px;
+            min-height: 44px;
         }
     }
 </style>
